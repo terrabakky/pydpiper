@@ -5,19 +5,43 @@ import requests
 
 from lxml import html
 
-url = raw_input('URL >> ').strip()
-response = requests.get(url)
+class Scrape:
 
-# print response.status_code
+	def __init__(self,target=None):
+		self.response_html = None
+		self.target = target
+		self.response = None
 
-# print response.headers
+		if target:
+			self.scrape(target)
 
-# print response.content
+
+	def scrape(self, url):
+		self.response = requests.get(url)
+		self.response
+		self.target = url
+		return True
 
 
-# print response.request.headers
+	def links(self):
+		response_html().xpath('//a/@href')
+		return True
 
-parsed_body = html.fromstring(response.text)
+	# def clean_links(self):
+	# 	links = [link for link in links if link != '#']
 
-print parsed_body.xpath('//a/@href')
+
+x = Scrape('http://uow.edu.au')
+
+print x.response.content
+	
+
+
+
+
+
+
+
+
+
 
