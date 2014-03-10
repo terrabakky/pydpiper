@@ -5,7 +5,8 @@ import requests
 
 from lxml import html
 
-response = requests.get('http://coursefinder.uow.edu.au')
+url = raw_input('URL >> ').strip()
+response = requests.get(url)
 
 # print response.status_code
 
