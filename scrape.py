@@ -1,51 +1,35 @@
 #!/usr/bin/env python
 
-
 import requests
 
 from lxml import html
     
 class Scrape:
-
-	def __init__(self,target=None):
-		self.response_html = None
-		self.target = target
-		self.response = None
+	def __init__(self):
 		self.parsed_body = None
-		self.links = None
+		self.links = []
 		self.visited = set()
-		if target:
-			self.scrape(target)
-			self.parse_body()
-
-
+		
 	def scrape(self, url):
-		if url in visited:
+		print url
+		if url in self.visited:
 			return False
         
-		self.response = requests.get(url)
+		response = requests.get(url)
 		self.visited.add(url)
-		return True
+		self.parse_body(response.text)
 			
-	def parse_body(self):
-		self.parsed_body = html.fromstring(self.response.text)
-		self.links = self.parsed_body.xpath('//a/@href')
+	def parse_body(self,html_string):
+		parsed_body = html.fromstring(html_string)
+		new_links = parsed_body.xpath('//a/@href')
+		self.links.extend([str(link) for link in new_links])
+
+
+
         
-        
+	
 
 
-		
 
-	# def clean_links(self):
-	# 	links = [link for link in links if link != '#']
-
-
-x = Scrape('http://uow.edu.au')
-
-print x.response.content
-
-print '##############'
-
-print x.links
 
 
